@@ -8,53 +8,106 @@ interface WelcomeScreenProps {
 
 const WelcomeScreen = ({ onContinue }: WelcomeScreenProps) => {
   return (
-    <div className="min-h-screen paper-bg flex items-center justify-center relative overflow-hidden">
-      <FloatingHearts count={20} />
+    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-pink-50 to-rose-100 flex items-center justify-center relative overflow-hidden">
+      {/* Decorative elements */}
+      <FloatingHearts count={15} />
       <Sparkles count={8} />
 
-      <div className="text-center page-enter z-10 px-4">
-        <h1 className="font-vintage-script text-6xl md:text-8xl text-primary mb-2 glow-pulse inline-block px-4 py-2 rounded-xl">
-          Happy Birthday
-        </h1>
+      {/* Main content */}
+      <div className="text-center z-10 px-4 max-w-2xl w-full animate-fade-in">
+        {/* Polaroid-style image container */}
+        <div className="mb-12 inline-block">
+          <div className="relative group">
+            {/* Bow emoji decoration on top */}
+            <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 text-4xl">
+              🎀
+            </div>
 
-        <h2 className="font-vintage-script text-5xl md:text-7xl text-accent-foreground mb-8">
-          Delulu 💖
-        </h2>
+            {/* Polaroid frame */}
+            <div className="bg-white rounded-2xl shadow-2xl p-6 hover:shadow-3xl transition-all duration-300 transform hover:scale-105">
+              {/* Image container */}
+              <div className="w-56 h-56 md:w-64 md:h-64 rounded-lg overflow-hidden bg-gradient-to-br from-pink-200 to-rose-200">
+                <img
+                  src={birthdayPhoto}
+                  alt="Welcome"
+                  className="w-full h-full object-cover"
+                />
+              </div>
 
-        {/* Photo */}
-        <div className="relative inline-block mb-8">
-          <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden photo-glow border-4 border-gold-light mx-auto">
-            <img
-              src={birthdayPhoto}
-              alt="Birthday Person"
-              className="w-full h-full object-cover"
-            />
+              {/* Polaroid text at bottom */}
+              <div className="mt-4 text-center">
+                <p className="text-pink-400 font-handwriting text-lg">Forever</p>
+              </div>
+            </div>
+
+            {/* Teddy bear emoji below */}
+            <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 text-5xl animate-bounce" style={{ animationDuration: "3s" }}>
+              🧸
+            </div>
           </div>
+        </div>
 
-          <span className="absolute -top-4 -right-4 text-3xl float-heart">💕</span>
-          <span
-            className="absolute -bottom-2 -left-4 text-2xl float-heart"
-            style={{ animationDelay: "1s" }}
+        {/* Text content */}
+        <div className="mt-20">
+          {/* Main heading */}
+          <h1 className="font-serif text-5xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-400 mb-2 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+            Welcome 💖
+          </h1>
+
+          {/* Subtitle */}
+          <p className="font-handwriting text-xl md:text-2xl text-rose-400 mb-8 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+            made with love 💕
+          </p>
+
+          {/* Continue button */}
+          <button
+            onClick={onContinue}
+            className="px-8 md:px-12 py-3 md:py-4 rounded-full bg-gradient-to-r from-pink-400 to-rose-400 text-white font-semibold text-lg md:text-xl shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 transform"
           >
-            💗
-          </span>
+            Continue 💗
+          </button>
         </div>
-
-        {/* Emojis */}
-        <div className="text-4xl mb-8 space-x-2">
-          <span className="inline-block bounce-gentle">🎂</span>
-          <span className="inline-block bounce-gentle" style={{ animationDelay: "0.3s" }}>🎉</span>
-          <span className="inline-block bounce-gentle" style={{ animationDelay: "0.6s" }}>🎈</span>
-          <span className="inline-block bounce-gentle" style={{ animationDelay: "0.9s" }}>🥳</span>
-        </div>
-
-        <button
-          onClick={onContinue}
-          className="px-10 py-4 rounded-full bg-primary text-primary-foreground font-vintage-heading text-xl tracking-wide hover:scale-110 transition-all duration-300 vintage-shadow hover:gold-glow"
-        >
-          Are you ready for the surprise? 👉
-        </button>
       </div>
+
+      {/* Custom animations */}
+      <style>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fade-in {
+          animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes bounce {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+
+        .animate-bounce {
+          animation: bounce 3s infinite;
+        }
+
+        @font-face {
+          font-family: "handwriting";
+          src: url("data:application/x-font-woff;charset=utf-8;base64,AAEAAAALAIAAAwAwT1MvMgkSBfMAAAC8AAAAYGNtYXAW/hOOAAABHAAAAFRnYXNwAAAAEAAAAXAAAAAhnbHlmvJaKlAAAA4AAAACsaGVhZAtEYQAAAzQAAAA2aGhlYQcKA/gAAANsAAAAJGhtdHgN4QAAAAADjAAAABBsb2NhAkQCpgAAA5QAAAAKbWF4cAGVAHsAAAOgAAAAIHBvc3T/hQAFAAADuAAAACBwcmVwutxWfgAAA8gAAAA7AAEAAAAA");
+        }
+
+        .font-handwriting {
+          font-family: "handwriting", cursive;
+        }
+      `}</style>
     </div>
   );
 };
